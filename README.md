@@ -146,5 +146,3 @@ Open and run the Jupyter notebooks:
 - Code is designed to be human-readable and well-documented
 - Results provide foundation for portfolio optimization decisions
 
-## Author
-Financial Analysis for GMF Investments Portfolio Management
