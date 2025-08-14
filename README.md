@@ -7,14 +7,22 @@ Our main case study focuses on Tesla (TSLA), incorporating S&P 500 (SPY) and US 
 The project is structured into 5 tasks, each producing key insights for final investment recommendations.
 
 📂 Project Structure
-├── task1/
-│   ├── eda.ipynb           # Exploratory Data Analysis
-│   ├── metrics.ipynb       # Performance metrics & risk analysis
-├── task2/                  # Forecasting with LSTM model
-├── task3/                  # Portfolio optimization (mean-variance)
-├── task4/                  # Final portfolio recommendation
-├── task5/                  # Backtest assessment
-└── README.md               # Project documentation
+Time_Series_Stock_Analysis/
+├── Notebooks/
+│   ├── Task1/   # EDA & risk analysis
+│   ├── Task2/   # ARIMA modeling
+│   ├── Task3/   # LSTM forecasting
+│   ├── Task4/   # Portfolio optimization
+│   └── Task5/   # Backtesting & performance
+├── src/
+│   ├── data_definition.py
+│   ├── forecast_analysis.py
+│   ├── forecast_visualize.py
+│   ├── portfolio_optimization.py
+│   └── portfolio_optimization_prep.py
+├── requirements.txt # Python dependencies
+└── README.md        # Project documentation
+
 
 Task 1: Exploratory Data Analysis (EDA)
 
