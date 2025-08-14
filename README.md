@@ -1,148 +1,135 @@
-# Time Series Analysis - Task 1
+📈 Time Series Stock Analysis & Portfolio Optimization
 
-## Project Overview
-This project analyzes historical financial data for three key assets (TSLA, BND, SPY) to support portfolio management decisions. The analysis covers the period from July 1, 2015, to July 31, 2025.
+This project is an end-to-end financial data analysis and forecasting pipeline focused on Tesla stock and a multi-asset portfolio. It combines time series forecasting, model evaluation, and portfolio optimization to provide insights into market trends, investment strategies, and potential risks.
 
-## Assets Analyzed
-- **TSLA (Tesla Inc.)**: High-growth stock with high volatility
-- **BND (Vanguard Total Bond Market ETF)**: Bond ETF providing stability and low risk
-- **SPY (SPDR S&P 500 ETF)**: ETF tracking S&P 500 for broad market exposure
+🚀 Features
 
-## Project Structure
+Data Exploration & Preprocessing (Task 1)
 
-### Core Scripts
-```
-├── data_loading.py          # Fetches data from yfinance API
-├── config.py               # Project configuration and parameters
-├── utils.py                # Utility functions for calculations
-├── main_analysis.py        # Main execution script
-```
+Time Series Forecasting Model Development (Task 2)
 
-### Analysis Notebooks
-```
-├── EDA.ipynb              # Comprehensive exploratory data analysis
-├── metrics.ipynb          # Risk metrics and performance analysis
-```
+Tesla Stock Price Forecasting (Task 3)
 
-### Data and Outputs
-```
-├── data/                  # Stored CSV data files
-├── outputs/              # Analysis results and reports
-├── figures/              # Generated visualizations
-```
+Portfolio Optimization using Modern Portfolio Theory (Task 4)
 
-## How to Run the Analysis
+Portfolio Impact Analysis for forecasted changes (Task 5)
 
-### Step 1: Install Required Libraries
-```python
-pip install yfinance pandas numpy matplotlib seaborn scipy statsmodels
-```
+Visualization of Forecasts & Optimization Results
 
-### Step 2: Run Data Loading
-```python
-python data_loading.py
-```
-This script will:
-- Fetch historical data for TSLA, BND, and SPY
-- Save data to CSV files in the `data/` folder
-- Display basic data information
+📂 Project Structure
+.
+├── Notebooks/
+│   ├── Task1/                       # Data collection & EDA
+│   ├── Task2/                       # Model building & evaluation
+│   ├── Task3/                       # Tesla forecast generation & analysis
+│   ├── Tak4/                        # Portfolio optimization
+│   ├── Task5/                       # Portfolio impact analysis
+│  
+│
+├── src/
+│   ├── data_definition.py           # Defines data structures and constants
+│   ├── forecast_analysis.py         # Forecast evaluation & metrics
+│   ├── forecast_visualize.py        # Visualization utilities for forecasts
+│   ├── portfolio_optimization.py    # Core portfolio optimization logic
+│   ├── portfolio_optimization_prep.py # Data prep for optimization
+│
+├── task4_optimization_template.py   # Template for optimization experiments
+└── README.md
 
-### Step 3: Run Complete Analysis
-```python
-python main_analysis.py
-```
-This script orchestrates the entire Task 1 analysis:
-- Loads and cleans data
-- Performs exploratory data analysis
-- Calculates risk metrics
-- Generates summary reports
+📊 Tasks Breakdown
+Task 1 – Data Collection & EDA
 
-### Step 4: Detailed Analysis (Optional)
-Open and run the Jupyter notebooks:
-- `EDA.ipynb` for detailed visualizations and insights
-- `metrics.ipynb` for comprehensive risk analysis
+Gathered Tesla stock data (and other assets for portfolio analysis).
 
-## Analysis Components
+Cleaned and structured the dataset for analysis.
 
-### 1. Data Preprocessing
-- **Purpose**: Clean and prepare data for analysis
-- **Methods**: Handle missing values, calculate returns, add technical indicators
-- **Outputs**: Clean datasets with additional features
+Performed exploratory analysis:
 
-### 2. Exploratory Data Analysis
-- **Purpose**: Understand data characteristics and patterns
-- **Methods**: Time series plots, distribution analysis, trend identification
-- **Key Insights**: Price movements, volatility patterns, market events
+Historical price trends.
 
-### 3. Stationarity Testing
-- **Purpose**: Test if data is suitable for time series modeling
-- **Methods**: Augmented Dickey-Fuller test on prices and returns
-- **Findings**: Prices are non-stationary, returns are stationary
+Seasonal patterns & volatility.
 
-### 4. Risk Metrics Calculation
-- **Value at Risk (VaR)**: Potential losses under normal conditions
-- **Conditional VaR**: Average loss beyond VaR threshold
-- **Sharpe Ratio**: Risk-adjusted return measure
-- **Maximum Drawdown**: Largest peak-to-trough decline
+Volume & return distribution.
 
-### 5. Outlier Detection
-- **Purpose**: Identify extreme market movements
-- **Methods**: Statistical threshold (±3 standard deviations)
-- **Applications**: Risk management and event analysis
+Task 2 – Model Development
 
-### 6. Correlation Analysis
-- **Purpose**: Understand how assets move together
-- **Methods**: Pearson correlation of daily returns
-- **Portfolio Implications**: Diversification opportunities
+Built and compared multiple time series models:
 
-## Key Findings
+ARIMA
 
-### Asset Characteristics
-- **TSLA**: High return potential (15%+ annual) but very high risk (40%+ volatility)
-- **BND**: Low risk (3-5% volatility) with stable returns (2-4% annual)
-- **SPY**: Balanced profile (10-12% returns, 15-20% volatility)
+SARIMA
 
-### Risk-Return Profile
-- TSLA offers growth but increases portfolio risk significantly
-- BND provides stability and reduces overall volatility
-- SPY delivers market-level performance with moderate risk
+LSTM (deep learning)
 
-### Correlation Insights
-- TSLA and SPY show moderate positive correlation (0.4-0.6)
-- BND has low correlation with stocks (0.0-0.2)
-- Combining all three enables effective diversification
+Evaluated using metrics like RMSE, MAE, MAPE.
 
-## Output Files
+Selected best-performing model for forecasting.
 
-### Generated Files
-- `task1_summary_results.csv`: Complete metrics summary
-- `correlation_matrix.csv`: Asset correlation matrix
-- `TICKER_data.csv`: Individual asset data files
+Task 3 – Tesla Price Forecast
 
-### Key Metrics Included
-- Annual returns and volatility
-- Sharpe ratios
-- Value at Risk (1% and 5% levels)
-- Maximum drawdown
-- Statistical properties (skewness, kurtosis)
+Generated 6–12 month forecasts using the chosen model.
 
-## Next Steps
-1. Review generated summary files and metrics
-2. Run visualization notebooks for detailed insights
-3. Proceed to Task 2 for time series forecasting models
-4. Use insights for portfolio optimization in Task 4
+Plotted forecasts with confidence intervals.
 
-## Dependencies
-- pandas: Data manipulation and analysis
-- numpy: Numerical computations
-- yfinance: Financial data fetching
-- matplotlib/seaborn: Visualization
-- scipy: Statistical functions
-- statsmodels: Time series analysis
+Analyzed:
 
-## Notes
-- Data is fetched from Yahoo Finance (yfinance)
-- All calculations use standard financial formulas
-- Code is designed to be human-readable and well-documented
-- Results provide foundation for portfolio optimization decisions
+Trend direction.
+
+Confidence interval changes over time.
+
+Potential market opportunities & risks.
+
+Task 4 – Portfolio Optimization
+
+Built a portfolio with Tesla + other assets.
+
+Used Modern Portfolio Theory to:
+
+Calculate optimal asset weights.
+
+Maximize returns for given risk.
+
+Visualize the Efficient Frontier.
+
+Task 5 – Portfolio Impact Analysis
+
+Integrated forecasted Tesla returns into portfolio simulation.
+
+Analyzed potential portfolio performance changes.
+
+Identified diversification benefits & risk exposure.
+
+
+
+⚙️ Installation & Usage
+# Clone the repository
+git clone https://github.com/ruhamds/time_series_stock_analysis.git
+cd time_series_stock_analysis
+
+# Create and activate virtual environment
+python -m venv venv
+source venv/bin/activate   # Mac/Linux
+venv\Scripts\activate      # Windows
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run example usage
+python example_usage.py
+
+📌 Requirements
+
+Python 3.9+
+
+pandas, numpy, matplotlib, seaborn
+
+statsmodels, scikit-learn
+
+keras/tensorflow (for LSTM)
+
+yfinance (for data retrieval)
+
+📑 License
+
+This project is licensed under the MIT License.
 
