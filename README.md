@@ -1,135 +1,154 @@
-📈 Time Series Stock Analysis & Portfolio Optimization
+📈 Tesla & Portfolio Optimization Project
+Overview
 
-This project is an end-to-end financial data analysis and forecasting pipeline focused on Tesla stock and a multi-asset portfolio. It combines time series forecasting, model evaluation, and portfolio optimization to provide insights into market trends, investment strategies, and potential risks.
+This project applies exploratory data analysis, performance metrics evaluation, LSTM-based forecasting, and portfolio optimization to build a model-driven investment strategy.
+Our main case study focuses on Tesla (TSLA), incorporating S&P 500 (SPY) and US Bond Index (BND) for diversification.
 
-🚀 Features
-
-Data Exploration & Preprocessing (Task 1)
-
-Time Series Forecasting Model Development (Task 2)
-
-Tesla Stock Price Forecasting (Task 3)
-
-Portfolio Optimization using Modern Portfolio Theory (Task 4)
-
-Portfolio Impact Analysis for forecasted changes (Task 5)
-
-Visualization of Forecasts & Optimization Results
+The project is structured into 5 tasks, each producing key insights for final investment recommendations.
 
 📂 Project Structure
-.
-├── Notebooks/
-│   ├── Task1/                       # Data collection & EDA
-│   ├── Task2/                       # Model building & evaluation
-│   ├── Task3/                       # Tesla forecast generation & analysis
-│   ├── Tak4/                        # Portfolio optimization
-│   ├── Task5/                       # Portfolio impact analysis
-│  
-│
-├── src/
-│   ├── data_definition.py           # Defines data structures and constants
-│   ├── forecast_analysis.py         # Forecast evaluation & metrics
-│   ├── forecast_visualize.py        # Visualization utilities for forecasts
-│   ├── portfolio_optimization.py    # Core portfolio optimization logic
-│   ├── portfolio_optimization_prep.py # Data prep for optimization
-│
-├── task4_optimization_template.py   # Template for optimization experiments
-└── README.md
+├── task1/
+│   ├── eda.ipynb           # Exploratory Data Analysis
+│   ├── metrics.ipynb       # Performance metrics & risk analysis
+├── task2/                  # Forecasting with LSTM model
+├── task3/                  # Portfolio optimization (mean-variance)
+├── task4/                  # Final portfolio recommendation
+├── task5/                  # Backtest assessment
+└── README.md               # Project documentation
 
-📊 Tasks Breakdown
-Task 1 – Data Collection & EDA
+Task 1: Exploratory Data Analysis (EDA)
 
-Gathered Tesla stock data (and other assets for portfolio analysis).
+We explored historical stock data for TSLA, SPY, and BND:
 
-Cleaned and structured the dataset for analysis.
+Checked for missing values, outliers, and data consistency
 
-Performed exploratory analysis:
+Visualized daily closing prices, returns, and volatility trends
 
-Historical price trends.
+Observed TSLA's higher volatility compared to SPY & BND
 
-Seasonal patterns & volatility.
+Key EDA Insights:
 
-Volume & return distribution.
+TSLA’s price swings are significantly larger than SPY & BND
 
-Task 2 – Model Development
+Bonds (BND) exhibit stable, low-volatility patterns
 
-Built and compared multiple time series models:
+TSLA’s price cycles are tied to macroeconomic events & earnings announcements
 
-ARIMA
+Task 2: Performance Metrics Analysis
 
-SARIMA
+We calculated risk & return metrics:
 
-LSTM (deep learning)
+Annualized Return
 
-Evaluated using metrics like RMSE, MAE, MAPE.
+Volatility
 
-Selected best-performing model for forecasting.
+Sharpe Ratio
 
-Task 3 – Tesla Price Forecast
+Max Drawdown
 
-Generated 6–12 month forecasts using the chosen model.
+Value at Risk (VaR)
 
-Plotted forecasts with confidence intervals.
+Example TSLA Metrics:
 
-Analyzed:
+Metric	Value
+Annual Return	23.1%
+Volatility	55.2%
+Sharpe Ratio	0.42
+Max Drawdown	-73.4%
+Task 3: Forecasting & Portfolio Optimization
 
-Trend direction.
+Using an LSTM model:
 
-Confidence interval changes over time.
+TSLA forecast: -71.2% expected return (negative outlook)
 
-Potential market opportunities & risks.
+Optimization prioritized minimum volatility portfolio over return maximization
 
-Task 4 – Portfolio Optimization
+Task 4: Final Portfolio Recommendation
 
-Built a portfolio with Tesla + other assets.
+Optimal Portfolio Allocation:
 
-Used Modern Portfolio Theory to:
+Asset	Allocation
+TSLA	0.0%
+BND	94.5%
+SPY	5.5%
 
-Calculate optimal asset weights.
+Portfolio Metrics:
 
-Maximize returns for given risk.
+Expected Annual Return: 2.6%
 
-Visualize the Efficient Frontier.
+Annual Volatility: 5.4%
 
-Task 5 – Portfolio Impact Analysis
+Sharpe Ratio: -0.343
 
-Integrated forecasted Tesla returns into portfolio simulation.
+95% VaR (daily): -0.549%
 
-Analyzed potential portfolio performance changes.
+Rationale:
 
-Identified diversification benefits & risk exposure.
+Avoided TSLA exposure due to negative forecast
+
+Focused on capital preservation with heavy bond allocation
+
+Accepted lower returns for controlled risk
+
+Task 5: Backtest Results
+
+Performance Summary:
+
+Strategy Return: 2.82%
+
+Benchmark Return (SPY): 12.92%
+
+Sharpe Ratio: Strategy -0.323, Benchmark 0.704
+
+Risk Analysis:
+
+Volatility: Strategy 5.0%, Benchmark 12.3%
+
+Max Drawdown: Strategy -4.3%, Benchmark -11.2%
+
+52% of trading days were positive
+
+Conclusion:
+
+Strategy underperformed in returns but succeeded in risk reduction
+
+Forecast-based portfolio avoided major losses from TSLA
+
+Trade-off between stability and missed growth opportunities
+
+📌 Final Verdict
+
+This project demonstrates:
+
+Data-driven investment decisions using EDA, risk metrics, and forecasts
+
+Portfolio optimization that aligns with investor risk tolerance
+
+The importance of backtesting before real-world application
+
+🚀 How to Run
+
+Clone the repository:
+
+git clone https://github.com/ruhamds/Time_Series_Stock_Analysis.git
 
 
+Install dependencies:
 
-⚙️ Installation & Usage
-# Clone the repository
-git clone https://github.com/ruhamds/time_series_stock_analysis.git
-cd time_series_stock_analysis
-
-# Create and activate virtual environment
-python -m venv venv
-source venv/bin/activate   # Mac/Linux
-venv\Scripts\activate      # Windows
-
-# Install dependencies
 pip install -r requirements.txt
 
-# Run example usage
-python example_usage.py
 
-📌 Requirements
+Open Jupyter Notebooks in task1/–task5/ and run sequentially.
 
-Python 3.9+
+📊 Tech Stack
 
-pandas, numpy, matplotlib, seaborn
+Python (pandas, numpy, matplotlib, seaborn)
 
-statsmodels, scikit-learn
+Finance: yfinance, PyPortfolioOpt
 
-keras/tensorflow (for LSTM)
+ML: TensorFlow/Keras (LSTM)
 
-yfinance (for data retrieval)
+Optimization: Mean-Variance, Sharpe Ratio maximization
 
-📑 License
-
-This project is licensed under the MIT License.
+Risk Analysis: VaR, Drawdown
 
