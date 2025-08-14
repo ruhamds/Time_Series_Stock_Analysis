@@ -1,10 +1,27 @@
-📈 Tesla & Portfolio Optimization Project
-Overview
+Time Series Stock Analysis Project
+📌 Project Overview
 
-This project applies exploratory data analysis, performance metrics evaluation, LSTM-based forecasting, and portfolio optimization to build a model-driven investment strategy.
-Our main case study focuses on Tesla (TSLA), incorporating S&P 500 (SPY) and US Bond Index (BND) for diversification.
+This project focuses on analyzing historical financial data, forecasting stock prices, and constructing an optimized investment portfolio using both statistical models (ARIMA) and machine learning models (LSTM). The project is structured into five tasks:
 
-The project is structured into 5 tasks, each producing key insights for final investment recommendations.
+Task 1: Exploratory Data Analysis & Risk Assessment
+
+Task 2: Model Selection & Evaluation (ARIMA)
+
+Task 3: Advanced Forecasting with LSTM
+
+Task 4: Portfolio Optimization
+
+Task 5: Backtesting & Performance Evaluation
+
+The analysis is performed on three key assets:
+
+TSLA (Tesla Inc.) – High-growth, high-risk equity
+
+BND (Vanguard Total Bond Market ETF) – Low-risk bond ETF
+
+SPY (S&P 500 ETF) – Broad market exposure
+
+Data range: July 1, 2015 – July 31, 2025 (10 years)
 
 📂 Project Structure
 Time_Series_Stock_Analysis/
@@ -20,143 +37,193 @@ Time_Series_Stock_Analysis/
 │   ├── forecast_visualize.py
 │   ├── portfolio_optimization.py
 │   └── portfolio_optimization_prep.py
+├── .github/
+│   └── workflows/
+│       └── ci.yml   # CI pipeline for linting and notebook execution
+├── data/            # Raw and processed datasets
+├── outputs/         # Generated reports and metrics
 ├── requirements.txt # Python dependencies
 └── README.md        # Project documentation
 
+✅ Task 1: Exploratory Data Analysis & Risk Metrics
 
-Task 1: Exploratory Data Analysis (EDA)
+Goal: Understand asset characteristics, correlations, and risk factors.
 
-We explored historical stock data for TSLA, SPY, and BND:
+Key Analyses
 
-Checked for missing values, outliers, and data consistency
+Stationarity Test (ADF): Prices are non-stationary; returns are stationary
 
-Visualized daily closing prices, returns, and volatility trends
+Volatility Analysis: TSLA shows high volatility, especially during 2020–2021
 
-Observed TSLA's higher volatility compared to SPY & BND
+Correlation Analysis:
 
-Key EDA Insights:
+TSLA ↔ SPY: Moderate positive correlation (0.4–0.6)
 
-TSLA’s price swings are significantly larger than SPY & BND
+BND ↔ Stocks: Very low correlation (0.0–0.2) → good diversification
 
-Bonds (BND) exhibit stable, low-volatility patterns
+Risk Metrics
 
-TSLA’s price cycles are tied to macroeconomic events & earnings announcements
+Value at Risk (95%)
 
-Task 2: Performance Metrics Analysis
-
-We calculated risk & return metrics:
-
-Annualized Return
-
-Volatility
+Conditional VaR
 
 Sharpe Ratio
 
-Max Drawdown
+Maximum Drawdown
 
-Value at Risk (VaR)
+Insights
 
-Example TSLA Metrics:
+TSLA offers high return potential but introduces significant risk
 
+BND provides stability and reduces portfolio volatility
+
+SPY offers balanced risk-return profile
+
+✅ Task 2: Model Selection & Evaluation (ARIMA)
+
+Goal: Fit ARIMA models to TSLA prices and select the best one.
+
+Models Compared
+Model Order	AIC	RMSE	MAE
+(0,1,0)	13646.47	77.96	62.97
+(1,1,0)	13646.54	77.94	62.97
+(0,1,1)	13646.59	77.94	62.97
+
+Selected Model: ARIMA(0,1,0) (lowest AIC, simplest model)
+
+Residual Analysis
+
+High volatility during 2020–2021
+
+Residuals are right-skewed with heavy tails
+
+Q-Q plots show non-normal distribution → ARIMA struggles during extreme events
+
+Conclusion: ARIMA captures overall trend but not volatility spikes → will use for baseline forecasts in Task 3.
+
+✅ Task 3: LSTM Forecasting
+
+Goal: Improve forecasting accuracy using deep learning.
+
+LSTM Training Summary
+
+Epochs: 25
+
+Final validation loss: 0.0008
+
+Model trained successfully with good convergence
+
+Forecast Summary
 Metric	Value
-Annual Return	23.1%
-Volatility	55.2%
-Sharpe Ratio	0.42
-Max Drawdown	-73.4%
-Task 3: Forecasting & Portfolio Optimization
+Current Price	$319.04
+6-Month Forecast Price	$205.52
+Price Change	-$113.52
+Expected Return (6M)	-35.6%
+Annualized Return	-71.2%
 
-Using an LSTM model:
+Confidence Interval:
 
-TSLA forecast: -71.2% expected return (negative outlook)
+Range: $205.52 – $301.93
 
-Optimization prioritized minimum volatility portfolio over return maximization
+Width: $96.41 (~30.2% of price)
 
-Task 4: Final Portfolio Recommendation
+Investment Recommendation
 
-Optimal Portfolio Allocation:
+Defensive strategy → Reduce TSLA allocation to 5–10%
 
-Asset	Allocation
-TSLA	0.0%
-BND	94.5%
-SPY	5.5%
+Increase BND allocation for stability
 
-Portfolio Metrics:
+Focus on capital preservation
 
-Expected Annual Return: 2.6%
+✅ Task 4: Portfolio Optimization
 
-Annual Volatility: 5.4%
+Goal: Allocate assets to minimize risk while considering forecasts.
+
+Optimal Portfolios
+
+1. Maximum Sharpe Ratio Portfolio
+
+100% SPY, 0% TSLA, 0% BND
+
+Return: 14.5%, Volatility: 18.2%, Sharpe: 0.547
+
+2. Minimum Volatility Portfolio (Recommended)
+
+TSLA: 0.0% | BND: 94.5% | SPY: 5.5%
+
+Expected Return: 2.6%
+
+Volatility: 5.4%
 
 Sharpe Ratio: -0.343
 
-95% VaR (daily): -0.549%
+Rationale: TSLA’s negative forecast (-71.2%) → prioritize capital preservation
 
-Rationale:
+✅ Task 5: Backtesting & Performance Evaluation
 
-Avoided TSLA exposure due to negative forecast
+Goal: Validate the strategy against a 60/40 benchmark.
 
-Focused on capital preservation with heavy bond allocation
+Performance Comparison
+Metric	Strategy (Min Vol)	Benchmark (60/40)
+Total Return	2.82%	12.92%
+Annualized Return	2.87%	13.15%
+Annualized Volatility	5.05%	12.28%
+Sharpe Ratio	-0.3227	0.7039
+Max Drawdown	-4.27%	-11.25%
+Key Conclusions
 
-Accepted lower returns for controlled risk
+✅ Lower volatility achieved
 
-Task 5: Backtest Results
+✅ Capital preservation focus succeeded
 
-Performance Summary:
 
-Strategy Return: 2.82%
 
-Benchmark Return (SPY): 12.92%
+Final Verdict: Mixed results → strategy useful for risk-averse investors prioritizing stability.
 
-Sharpe Ratio: Strategy -0.323, Benchmark 0.704
+🔍 Technical Workflow
 
-Risk Analysis:
+Data Collection → yfinance
 
-Volatility: Strategy 5.0%, Benchmark 12.3%
+EDA & Risk Analysis → Task 1
 
-Max Drawdown: Strategy -4.3%, Benchmark -11.2%
+Modeling
 
-52% of trading days were positive
+ARIMA (Task 2)
 
-Conclusion:
+LSTM (Task 3)
 
-Strategy underperformed in returns but succeeded in risk reduction
+Portfolio Optimization → Mean-Variance approach (Task 4)
 
-Forecast-based portfolio avoided major losses from TSLA
+Backtesting & Validation (Task 5)
 
-Trade-off between stability and missed growth opportunities
+⚙️ Git Workflow & CI/CD
 
-📌 Final Verdict
+Branching Strategy:
 
-This project demonstrates:
+main → production-ready
 
-Data-driven investment decisions using EDA, risk metrics, and forecasts
+dev → feature development
 
-Portfolio optimization that aligns with investor risk tolerance
+CI/CD: Implemented with GitHub Actions
 
-The importance of backtesting before real-world application
+Linting (flake8)
 
-🚀 How to Run
+Notebook execution (nbconvert)
 
-Clone the repository:
+Unit testing (pytest)
 
+
+
+🚀 How to Run the Project
+# Clone repository
 git clone https://github.com/ruhamds/Time_Series_Stock_Analysis.git
+cd Time_Series_Stock_Analysis
 
-
-Install dependencies:
-
+# Install dependencies
 pip install -r requirements.txt
 
+# Run Jupyter notebooks
+jupyter notebook
 
-Open Jupyter Notebooks in task1/–task5/ and run sequentially.
-
-📊 Tech Stack
-
-Python (pandas, numpy, matplotlib, seaborn)
-
-Finance: yfinance, PyPortfolioOpt
-
-ML: TensorFlow/Keras (LSTM)
-
-Optimization: Mean-Variance, Sharpe Ratio maximization
-
-Risk Analysis: VaR, Drawdown
-
+# Or execute main scripts
+python src/portfolio_optimization.py
