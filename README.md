@@ -33,11 +33,8 @@ Time_Series_Stock_Analysis/
 ├── .github/
 │   └── workflows/
 │       └── ci.yml           # CI pipeline for linting and testing
-├── data/                    # Raw and processed datasets (e.g., CSV files)
-├── outputs/                 # Reports, metrics, and visualizations
 ├── requirements.txt         # Python dependencies
 └── README.md                # Project documentation
-text## ✅ Task Summaries
 
 ### Task 1: Exploratory Data Analysis & Risk Metrics
 - **Goal:** Assess asset behavior and risk.
