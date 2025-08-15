@@ -27,7 +27,12 @@ jobs:
 
     - name: Run all notebooks
       run: |
-        for nb in Notebooks/*.ipynb; do
-          echo "Running $nb"
-          jupyter nbconvert --to notebook --execute "$nb" --output "executed_${nb##*/}"
+        set -e  # stop if any command fails
+        find Notebooks -name "*.ipynb" -type f | while read nb; do
+          echo "🚀 Running $nb"
+          jupyter nbconvert \
+            --to notebook \
+            --execute "$nb" \
+            --output "executed_${nb##*/}" \
+            --ExecutePreprocessor.timeout=600
         done
